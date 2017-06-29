@@ -104,7 +104,7 @@
         function _refreshStatisticData() {
             $http({
                 method: 'GET',
-                url: $scope.host_url + '/statistic'
+                url: '/statistic'
             }).then(function successCallback(response) {
                 $scope.files = response.data;
             }, function errorCallback(response) {
@@ -115,7 +115,7 @@
         $scope.filteredData = function _filteredData(lines) {
             $http({
                 method: 'GET',
-                url: $scope.host_url + '/statistic/filter?linesCount=' + lines
+                url: '/statistic/filter?linesCount=' + lines
             }).then(function successCallback(response) {
                 $scope.files = response.data;
             }, function errorCallback(response) {
