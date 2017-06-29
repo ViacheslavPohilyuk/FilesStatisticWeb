@@ -81,6 +81,8 @@
 
     //Controller Part
     app.controller("StatisticController", function ($scope, $http) {
+        $scope.host_url = 'https://guarded-sea-65201.herokuapp.com';
+
         $scope.files = [];
 
         $scope.countLines = [
@@ -92,7 +94,7 @@
             {name: '250-300 lines', val: '250'},
             {name: 'more than 300 lines', val: '300'}
         ];
-        $scope.linesChoice = $scope.countLines[0]; // red
+        $scope.linesChoice = $scope.countLines[0];
 
         //Now load the data from server
         _refreshStatisticData();
@@ -102,7 +104,7 @@
         function _refreshStatisticData() {
             $http({
                 method: 'GET',
-                url: 'http://localhost:8080/statistic'
+                url: $scope.host_url + '/statistic'
             }).then(function successCallback(response) {
                 $scope.files = response.data;
             }, function errorCallback(response) {
@@ -113,7 +115,7 @@
         $scope.filteredData = function _filteredData(lines) {
             $http({
                 method: 'GET',
-                url: 'http://localhost:8080/statistic/filter?linesCount=' + lines
+                url: $scope.host_url + '/statistic/filter?linesCount=' + lines
             }).then(function successCallback(response) {
                 $scope.files = response.data;
             }, function errorCallback(response) {
