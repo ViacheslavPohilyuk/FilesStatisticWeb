@@ -47,11 +47,9 @@ public class StatisticController {
 
         /* Filtering collections of TextFile objects by lines count */
         if (linesCount != null) {
-            if (!linesCount.equals("linesCount")) {
-                files = files.stream()
-                        .filter(f -> ((f.getLinesStatistic().size() >= linesCount) && f.getLinesStatistic().size() <= (linesCount + 50)) || (f.getLinesStatistic().size() >= 300))
-                        .collect(Collectors.toList());
-            }
+            files = files.stream()
+                    .filter(f -> ((f.getLinesStatistic().size() >= linesCount) && f.getLinesStatistic().size() <= (linesCount + 50)) || (f.getLinesStatistic().size() >= 300))
+                    .collect(Collectors.toList());
         }
         return files;
     }
