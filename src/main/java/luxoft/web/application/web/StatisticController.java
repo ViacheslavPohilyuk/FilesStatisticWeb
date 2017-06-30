@@ -45,10 +45,20 @@ public class StatisticController {
     Collection<TextFile> statisticFilter(@RequestParam(value = "linesCount", required = false) Integer linesCount) {
         Collection<TextFile> files = dbService.getAllTextFiles();
 
+        System.out.println("linesCount: " + linesCount);
+
         /* Filtering collections of TextFile objects by lines count */
         if (linesCount != null) {
             files = files.stream()
-                    .filter(f -> ((f.getLinesStatistic().size() >= linesCount) && f.getLinesStatistic().size() <= (linesCount + 50)) || (f.getLinesStatistic().size() >= 300))
+                    .filter(f -> {
+                        if ((f.getLinesStatistic().size() >= linesCount) && (f.getLinesStatistic().size() <= (linesCount + 50))) {
+                            return true;
+                        }
+                        else if ((linesCount == 300) && (f.getLinesStatistic().size() >= linesCount)) {
+                            return true;
+                        }
+                        return false;
+                    })
                     .collect(Collectors.toList());
         }
         return files;
