@@ -38,9 +38,9 @@ public class HibernateConfig {
         // BasicDataSource dataSource = new BasicDataSource();
         DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://localhost:3306/FilesStatistic" + settings);
-        ds.setUsername("root");
-        ds.setPassword("slavaraid123");
+        ds.setUrl("jdbc:mysql://us-cdbr-iron-east-03.cleardb.net/heroku_e036290c382dd90" + settings);
+        ds.setUsername("b7c9247c706ec2");
+        ds.setPassword("6e5dcbe9");
         return ds;
     }
 
