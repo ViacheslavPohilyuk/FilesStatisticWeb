@@ -1,10 +1,10 @@
-package luxoft.web.application.web;
+package files.statistic.web.application.web;
 
-import luxoft.web.application.service.HibernateDBService;
-import luxoft.web.application.model.LineStatistic;
+import files.statistic.web.application.model.LineStatistic;
+import files.statistic.web.application.model.TextForm;
+import files.statistic.web.application.service.HibernateDBService;
 
-import luxoft.web.application.model.TextFile;
-import luxoft.web.application.model.TextForm;
+import files.statistic.web.application.model.TextFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

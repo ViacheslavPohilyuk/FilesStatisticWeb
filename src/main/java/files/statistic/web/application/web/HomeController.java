@@ -1,4 +1,4 @@
-package luxoft.web.application.web;
+package files.statistic.web.application.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

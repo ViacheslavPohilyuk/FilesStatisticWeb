@@ -1,4 +1,4 @@
-package luxoft.web.application.config;
+package files.statistic.web.application.config;
 
 import org.hibernate.SessionFactory;
 
@@ -14,7 +14,7 @@ import java.util.Properties;
 
 @org.springframework.context.annotation.Configuration
 @EnableTransactionManagement
-@ComponentScan({"luxoft.web.application"})
+@ComponentScan({"files.statistic.web.application"})
 public class HibernateConfig {
     @Bean
     public LocalSessionFactoryBean sessionFactory() {

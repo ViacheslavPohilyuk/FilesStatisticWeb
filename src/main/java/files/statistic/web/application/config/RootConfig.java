@@ -1,4 +1,4 @@
-package luxoft.web.application.config;
+package files.statistic.web.application.config;
 
 import org.springframework.context.annotation.Configuration;
 

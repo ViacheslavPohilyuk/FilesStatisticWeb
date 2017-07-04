@@ -1,4 +1,4 @@
-package luxoft.web.application.model;
+package files.statistic.web.application.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;

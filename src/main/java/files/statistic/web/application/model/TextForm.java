@@ -1,4 +1,4 @@
-package luxoft.web.application.model;
+package files.statistic.web.application.model;
 
 import lombok.Data;
 import javax.validation.constraints.NotNull;

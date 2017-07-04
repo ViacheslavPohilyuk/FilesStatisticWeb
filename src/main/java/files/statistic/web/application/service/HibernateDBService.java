@@ -1,12 +1,11 @@
-package luxoft.web.application.service;
+package files.statistic.web.application.service;
 
-import luxoft.web.application.dao.TextFileDAO;
-import luxoft.web.application.model.LineStatistic;
-import luxoft.web.application.model.TextFile;
+import files.statistic.web.application.dao.TextFileDAO;
+import files.statistic.web.application.model.LineStatistic;
+import files.statistic.web.application.model.TextFile;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,8 +68,8 @@ public class HibernateDBService {
 
     public void addTextStatistic(String text) {
         try {
-            Session session = sessionFactory.openSession();
-            Transaction tx = session.beginTransaction();
+            /*Session session = sessionFactory.openSession();
+            Transaction tx = session.beginTransaction();*/
 
             TextFile textFile = new TextFile("PlainText");
 
@@ -81,9 +80,10 @@ public class HibernateDBService {
             for (LineStatistic line : linesStat)
                 textFile.getLinesStatistic().add(line);
 
-            session.persist(textFile);
+            System.out.println("TextFile: " + textFile.toString());
+            /*session.persist(textFile);
             tx.commit();
-            session.close();
+            session.close();*/
         } catch (HibernateException e) {
             e.printStackTrace();
         }

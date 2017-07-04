@@ -1,13 +1,12 @@
-package luxoft.web.application.dao;
+package files.statistic.web.application.dao;
 
-import luxoft.web.application.model.TextFile;
+import files.statistic.web.application.model.TextFile;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
-import java.util.List;
 
 public class TextFileDAO {
     private Session session;

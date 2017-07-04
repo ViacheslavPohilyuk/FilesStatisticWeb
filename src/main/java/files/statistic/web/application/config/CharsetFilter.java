@@ -1,4 +1,4 @@
-package luxoft.web.application.config;
+package files.statistic.web.application.config;
 
 import javax.servlet.*;
 import java.io.IOException;
