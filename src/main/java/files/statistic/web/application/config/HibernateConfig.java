@@ -4,24 +4,31 @@ import org.hibernate.SessionFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.sql.DataSource;
 import java.util.Properties;
 
 @org.springframework.context.annotation.Configuration
 @EnableTransactionManagement
+@PropertySource("classpath:localhost_dbconnection.properties")
 @ComponentScan({"files.statistic.web.application"})
 public class HibernateConfig {
+
+    @Autowired
+    private Environment env;
+
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(restDataSource());
         sessionFactory.setPackagesToScan(
-                new String[]{"luxoft.web.application.model"});
+                new String[]{"files.statistic.web.application.model"});
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
@@ -38,9 +45,9 @@ public class HibernateConfig {
         // BasicDataSource dataSource = new BasicDataSource();
         DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://us-cdbr-iron-east-03.cleardb.net/heroku_e036290c382dd90" + settings);
-        ds.setUsername("b7c9247c706ec2");
-        ds.setPassword("6e5dcbe9");
+        ds.setUrl(env.getProperty("jdbc.url") + "/" + env.getProperty("jdbc.db") + settings);
+        ds.setUsername(env.getProperty("jdbc.username"));
+        ds.setPassword(env.getProperty("jdbc.password"));
         return ds;
     }
 

@@ -5,11 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /* Lombok annotations
@@ -32,11 +31,7 @@ public class TextFile implements Serializable {
     private String name;
 
     @Column(name = "dateStatComp")
-    @JsonIgnore
-    private Date dateOfStatisticComputation;
-
-    @Transient
-    private String formatDate;
+    private String dateOfStatisticComputation;
 
     @OneToMany(
             fetch = FetchType.EAGER,
@@ -46,15 +41,12 @@ public class TextFile implements Serializable {
     private List<LineStatistic> linesStatistic = new ArrayList<>();
 
     public TextFile(String name) {
-        /* Getting current date with in time zone: "Africa/Cairo" */
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        df.setTimeZone(TimeZone.getTimeZone("Africa/Cairo"));
-        Calendar cal = df.getCalendar();
-        cal.add(Calendar.HOUR, +3);
-        cal.add(Calendar.YEAR, +80);
+        /* Getting current date when the statistic is calculated */
+        String ldt = new LocalDateTime().toString();
+        int indexT = ldt.indexOf('T');
+        String dateAdded = ldt.substring(0, indexT) + " " + ldt.substring(indexT + 1, ldt.lastIndexOf(':'));
 
+        this.dateOfStatisticComputation = dateAdded;
         this.name = name;
-        this.dateOfStatisticComputation = cal.getTime();
     }
-
 }

@@ -18,7 +18,7 @@ import org.thymeleaf.templateresolver.TemplateResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("luxoft.web.application")
+@ComponentScan("files.statistic.web.application")
 public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {

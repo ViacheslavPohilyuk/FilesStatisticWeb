@@ -9,11 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 
 /**
  * Created by mac on 26.06.17.
@@ -47,17 +43,6 @@ public class HibernateDBService {
             Session session = sessionFactory.openSession();
             TextFileDAO dao = new TextFileDAO(session);
             TFlist = dao.getAll();
-
-            /* Date format */
-            for (TextFile tf : TFlist) {
-                Date date = tf.getDateOfStatisticComputation();
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(date);
-                cal.add(Calendar.HOUR, -3);
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                tf.setFormatDate(df.format(cal.getTime()));
-            }
-
             session.close();
             return TFlist;
         } catch (HibernateException e) {

@@ -5,13 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>LuxoftTask</groupId>
-    <artifactId>WebApp</artifactId>
+    <artifactId>FilesStatisticWeb</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <joda-time.version>2.9.9</joda-time.version>
         <hibernate-core.version>4.3.10.Final</hibernate-core.version>
         <spring-core.version>4.3.7.RELEASE</spring-core.version>
         <spring-web.version>4.3.7.RELEASE</spring-web.version>
@@ -24,6 +25,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
