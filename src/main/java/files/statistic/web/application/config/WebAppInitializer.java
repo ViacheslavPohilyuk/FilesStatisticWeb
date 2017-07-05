@@ -3,6 +3,8 @@ package files.statistic.web.application.config;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration;
 
 /**
  * Created by mac on 11.04.17.
@@ -27,5 +29,13 @@ public class WebAppInitializer
     @Override
     protected Filter[] getServletFilters() {
         return new Filter[]{new CharsetFilter()};
+    }
+
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        boolean done = registration.setInitParameter("throwExceptionIfNoHandlerFound", "true"); // -> true
+        if (!done) throw new RuntimeException();
+        registration.setMultipartConfig(
+                new MultipartConfigElement("/tmp", 2097152, 4194304, 0));
     }
 }

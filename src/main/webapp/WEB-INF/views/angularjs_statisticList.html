@@ -75,6 +75,12 @@
         bottom: -5px; /* Положение от нижнего края */
         line-height: 1px;
     }
+
+    .fileInput {
+        position: relative; /* Абсолютное позиционирование */
+        bottom: -5px; /* Положение от нижнего края */
+        line-height: 1px;
+    }
 </style>
 <script>
     var app = angular.module("StatisticManagement", []);
@@ -140,13 +146,23 @@
     </form>
 </div>
 
+<div class="fileUpload">
+    <h3>You can add your text file:</h3>
+    <form method="POST" action="/statistic/upload" enctype="multipart/form-data">
+        <input type="file"
+               name="textFile"
+               accept="text/plain"/><br/>
+        <input class="fileInput" type="submit" value="Add"/>
+    </form>
+</div>
+
 <div class="filter">
     <h3>Filter files statistic (by lines count):</h3>
     <form ng-submit="filteredData(linesChoice.val)">
         <label>
             <select ng-model="linesChoice" ng-options="count.name for count in countLines"></select>
         </label><br/>
-        <input class="filterInput" type="submit" value="filter"/>
+        <input class="filterInput" type="submit" value="Filter"/>
     </form>
 </div>
 
@@ -170,7 +186,7 @@
             </td>
             <td class="dateCell"
                 rowspan="{{file.linesStatistic.length}}"
-                ng-if="file.linesStatistic.indexOf(line)==0">{{ file.formatDate }}
+                ng-if="file.linesStatistic.indexOf(line)==0">{{ file.dateOfStatisticComputation }}
             </td>
             <td class="num"> {{ file.linesStatistic.indexOf(line) + 1 }}</td>
             <td class="lword"> {{ line.longestWord }}</td>

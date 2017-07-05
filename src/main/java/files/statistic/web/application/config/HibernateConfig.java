@@ -35,17 +35,11 @@ public class HibernateConfig {
 
     @Bean
     public javax.sql.DataSource restDataSource() {
-        String settings = "?useUnicode=true&" +
-                "characterEncoding=utf-8&" +
-                "useJDBCCompliantTimezoneShift=true&" +
-                "useLegacyDatetimeCode=false&" +
-                "serverTimezone=UTC&" +
-                "useSSL=false";
-
-        // BasicDataSource dataSource = new BasicDataSource();
         DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl(env.getProperty("jdbc.url") + "/" + env.getProperty("jdbc.db") + settings);
+        ds.setUrl(env.getProperty("jdbc.url") + "/" +
+                env.getProperty("jdbc.db") + "?" +
+                env.getProperty("jdbc.settings"));
         ds.setUsername(env.getProperty("jdbc.username"));
         ds.setPassword(env.getProperty("jdbc.password"));
         return ds;
