@@ -80,7 +80,6 @@ public class DBService {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             LineStatistic[] linesStat = LineStatistic.computeLineStatistic(text);
             for (LineStatistic line : linesStat)
                 textFile.getLinesStatistic().add(line);
