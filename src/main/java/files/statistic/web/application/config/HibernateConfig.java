@@ -16,7 +16,7 @@ import java.util.Properties;
 
 @org.springframework.context.annotation.Configuration
 @EnableTransactionManagement
-@PropertySource("classpath:localhost_dbconnection.properties")
+@PropertySource("classpath:heroku_dbconnection.properties")
 @ComponentScan({"files.statistic.web.application"})
 public class HibernateConfig {
 
