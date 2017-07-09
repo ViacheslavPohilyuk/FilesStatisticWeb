@@ -21,7 +21,7 @@ public class TextFileDAO {
 
     public Collection<TextFile> getAll() throws HibernateException {
         return new LinkedHashSet(session.createCriteria(TextFile.class)
-                .addOrder(Order.desc("dateOfStatisticComputation"))
+                .addOrder(Order.desc("id"))
                 .list());
 
     }

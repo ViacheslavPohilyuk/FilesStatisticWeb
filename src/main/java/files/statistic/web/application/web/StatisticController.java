@@ -7,10 +7,12 @@ import files.statistic.web.application.service.DBService;
 
 import files.statistic.web.application.model.TextFile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.json.JsonObject;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
