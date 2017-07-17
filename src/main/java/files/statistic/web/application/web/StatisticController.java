@@ -14,9 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.json.JsonObject;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -29,8 +27,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class StatisticController {
     private DBService dbService;
 
-    //int runtimeFilesCount;
-    private Collection<TextFile> files;
+    private int runtimeFilesCount;
+    private Long newFileId;
+    private LinkedList<TextFile> files;
 
     @Autowired
     public void setDbService(DBService dbService) {
@@ -39,10 +38,15 @@ public class StatisticController {
 
     @RequestMapping(method = GET)
     public @ResponseBody
-    Collection<TextFile> allFilesStatistic() {
+    List<TextFile> allFilesStatistic() {
         if (files == null) {
-            files = dbService.getAllTextFiles();
-            //runtimeFilesCount = files.size();
+            files = new LinkedList<>(dbService.getAllTextFiles());
+            runtimeFilesCount = files.size();
+            System.err.println("Load all files!");
+        }
+        else if(files.size() != runtimeFilesCount) {
+            files.addFirst(dbService.getTextFile(newFileId));
+            System.err.println("Load new file!");
         }
         return files;
     }
@@ -61,15 +65,15 @@ public class StatisticController {
 
     @RequestMapping(value = "/addtext", method = RequestMethod.POST)
     public String saveTextStatistic(TextForm form) throws Exception {
-        dbService.saveTextStatistic(form.getMessage());
-        //runtimeFilesCount++;
+        newFileId = dbService.saveTextStatistic(form.getMessage());
+        runtimeFilesCount++;
         return "redirect:/";
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String processUpload(@RequestPart("textFile") MultipartFile file) throws IOException {
-        dbService.saveUploadedTextFileStatistic(file);
-        //runtimeFilesCount++;
+        newFileId = dbService.saveUploadedTextFileStatistic(file);
+        runtimeFilesCount++;
         return "redirect:/";
     }
 }

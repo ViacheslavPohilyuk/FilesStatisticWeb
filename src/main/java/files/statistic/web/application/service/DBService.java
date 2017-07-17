@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -29,16 +30,18 @@ public class DBService {
         this.sessionFactory = sessionFactory;
     }
 
-    private void updateSession(Consumer<Session> updateStmt) {
+    private Long updateSession(Function<Session, Long> updateStmt) {
+        Long generatedId = null;
         try {
             Session session = sessionFactory.openSession();
             Transaction tx = session.beginTransaction();
-            updateStmt.accept(session);
+            generatedId = updateStmt.apply(session);
             tx.commit();
             session.close();
         } catch (HibernateException e) {
             e.printStackTrace();
         }
+        return generatedId;
     }
 
     private <T> T readSession(Function<Session, T> readStmt) {
@@ -61,18 +64,20 @@ public class DBService {
         return readSession((s) -> new TextFileDAO(s).getAll());
     }
 
-    public void saveTextStatistic(String text) {
-        updateSession((s) -> {
+    public Long saveTextStatistic(String text) {
+        return updateSession((s) -> {
             TextFile textFile = new TextFile("PlainText");
             LineStatistic[] linesStat = LineStatistic.computeLineStatistic(text);
             for (LineStatistic line : linesStat)
                 textFile.getLinesStatistic().add(line);
             s.persist(textFile);
+            s.flush();
+            return textFile.getId();
         });
     }
 
-    public void saveUploadedTextFileStatistic(MultipartFile file) {
-        updateSession((s) -> {
+    public Long saveUploadedTextFileStatistic(MultipartFile file) {
+        return updateSession((s) -> {
             TextFile textFile = new TextFile(file.getOriginalFilename());
             String text = null;
             try {
@@ -84,6 +89,8 @@ public class DBService {
             for (LineStatistic line : linesStat)
                 textFile.getLinesStatistic().add(line);
             s.persist(textFile);
+            s.flush();
+            return textFile.getId();
         });
     }
 }
