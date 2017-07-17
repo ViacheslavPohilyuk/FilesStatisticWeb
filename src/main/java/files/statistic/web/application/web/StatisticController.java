@@ -29,6 +29,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class StatisticController {
     private DBService dbService;
 
+    //int runtimeFilesCount;
+    private Collection<TextFile> files;
+
     @Autowired
     public void setDbService(DBService dbService) {
         this.dbService = dbService;
@@ -37,7 +40,11 @@ public class StatisticController {
     @RequestMapping(method = GET)
     public @ResponseBody
     Collection<TextFile> allFilesStatistic() {
-        return dbService.getAllTextFiles();
+        if (files == null) {
+            files = dbService.getAllTextFiles();
+            //runtimeFilesCount = files.size();
+        }
+        return files;
     }
 
     @RequestMapping(value = "/{id}", method = GET)
@@ -55,12 +62,14 @@ public class StatisticController {
     @RequestMapping(value = "/addtext", method = RequestMethod.POST)
     public String saveTextStatistic(TextForm form) throws Exception {
         dbService.saveTextStatistic(form.getMessage());
+        //runtimeFilesCount++;
         return "redirect:/";
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String processUpload(@RequestPart("textFile") MultipartFile file) throws IOException {
         dbService.saveUploadedTextFileStatistic(file);
+        //runtimeFilesCount++;
         return "redirect:/";
     }
 }
