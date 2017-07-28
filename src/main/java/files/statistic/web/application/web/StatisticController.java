@@ -3,9 +3,9 @@ package files.statistic.web.application.web;
 import files.statistic.web.application.model.LineStatistic;
 import files.statistic.web.application.model.StatisticFilter;
 import files.statistic.web.application.model.TextForm;
-import files.statistic.web.application.service.DBService;
 
 import files.statistic.web.application.model.TextFile;
+import files.statistic.web.application.service.StatisticDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,39 +22,36 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Controller
 @RequestMapping("/statistic")
 public class StatisticController {
-    private DBService dbService;
     @Autowired
-    public void setDbService(DBService dbService) {
-        this.dbService = dbService;
-    }
+    private StatisticDataService statisticDataService;
 
     @RequestMapping(method = GET)
     public @ResponseBody
     Collection<TextFile> allFilesStatistic() {
-        return dbService.getAllTextFiles();
+        return statisticDataService.getAllTextFiles();
     }
 
     @RequestMapping(value = "/{id}", method = GET)
     public @ResponseBody
     List<LineStatistic> oneFileStatistic(@PathVariable long id) {
-        return dbService.getTextFile(id).getLinesStatistic();
+        return statisticDataService.getTextFile(id).getLinesStatistic();
     }
 
     @RequestMapping(value = "/filter", method = GET)
     public @ResponseBody
     Collection<TextFile> statisticFilter(StatisticFilter filt) {
-        return filt.filtering(dbService.getAllTextFiles());
+        return filt.filtering(statisticDataService.getAllTextFiles());
     }
 
     @RequestMapping(value = "/addtext", method = RequestMethod.POST)
     public String saveTextStatistic(TextForm form) throws Exception {
-        dbService.saveTextStatistic(form.getMessage());
+        statisticDataService.saveTextStatistic(form.getMessage());
         return "redirect:/";
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String processUpload(@RequestPart("textFile") MultipartFile file) throws IOException {
-        dbService.saveUploadedTextFileStatistic(file);
+        statisticDataService.saveUploadedTextFileStatistic(file);
         return "redirect:/";
     }
 }
