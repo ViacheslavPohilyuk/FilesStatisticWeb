@@ -34,7 +34,7 @@ public class TextFile implements Serializable {
     private String dateOfStatisticComputation;
 
     @OneToMany(
-            //fetch = FetchType.EAGER,
+            fetch = FetchType.EAGER,
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
