@@ -35,7 +35,7 @@ public class DBService {
         try {
             Session session = sessionFactory.openSession();
             Transaction tx = session.beginTransaction();
-            generatedId = updateStmt.apply(session);
+            generatedId = updateStmt.apply(session); // update operation
             tx.commit();
             session.close();
         } catch (HibernateException e) {
@@ -48,7 +48,7 @@ public class DBService {
         T result = null;
         try {
             Session session = sessionFactory.openSession();
-            result = readStmt.apply(session);
+            result = readStmt.apply(session); // read data operation
             session.close();
         } catch (HibernateException e) {
             e.printStackTrace();

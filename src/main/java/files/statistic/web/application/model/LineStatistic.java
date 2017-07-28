@@ -17,6 +17,11 @@ import java.io.Serializable;
 @Entity
 @Table(name = "LineStatistic")
 public class LineStatistic implements Serializable {
+
+    //@JsonIgnore
+    //@ManyToOne
+    //private TextFile file;
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +39,6 @@ public class LineStatistic implements Serializable {
 
     @Column(name = "averageWordLength")
     private int avgWordLength;
-
-    public LineStatistic(String longestWord, String shortestWord, int lineLength, int avgWordLength) {
-        this(null, longestWord, shortestWord, lineLength, avgWordLength);
-    }
 
     /**
      * This method computes statistic of the all lines in text

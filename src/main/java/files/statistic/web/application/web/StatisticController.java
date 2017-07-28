@@ -7,15 +7,12 @@ import files.statistic.web.application.service.DBService;
 
 import files.statistic.web.application.model.TextFile;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.json.JsonObject;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -26,11 +23,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RequestMapping("/statistic")
 public class StatisticController {
     private DBService dbService;
-
-    private int runtimeFilesCount;
-    private Long newFileId;
-    private LinkedList<TextFile> files;
-
     @Autowired
     public void setDbService(DBService dbService) {
         this.dbService = dbService;
@@ -38,17 +30,8 @@ public class StatisticController {
 
     @RequestMapping(method = GET)
     public @ResponseBody
-    List<TextFile> allFilesStatistic() {
-        if (files == null) {
-            files = new LinkedList<>(dbService.getAllTextFiles());
-            runtimeFilesCount = files.size();
-            System.err.println("Load all files!");
-        }
-        else if(files.size() != runtimeFilesCount) {
-            files.addFirst(dbService.getTextFile(newFileId));
-            System.err.println("Load new file!");
-        }
-        return files;
+    Collection<TextFile> allFilesStatistic() {
+        return dbService.getAllTextFiles();
     }
 
     @RequestMapping(value = "/{id}", method = GET)
@@ -65,15 +48,13 @@ public class StatisticController {
 
     @RequestMapping(value = "/addtext", method = RequestMethod.POST)
     public String saveTextStatistic(TextForm form) throws Exception {
-        newFileId = dbService.saveTextStatistic(form.getMessage());
-        runtimeFilesCount++;
+        dbService.saveTextStatistic(form.getMessage());
         return "redirect:/";
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String processUpload(@RequestPart("textFile") MultipartFile file) throws IOException {
-        newFileId = dbService.saveUploadedTextFileStatistic(file);
-        runtimeFilesCount++;
+        dbService.saveUploadedTextFileStatistic(file);
         return "redirect:/";
     }
 }
