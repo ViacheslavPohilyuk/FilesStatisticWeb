@@ -1,15 +1,15 @@
-package files.statistic.web.application.data.service;
+package files.statistic.web.application.data;
 
-import files.statistic.web.application.data.SessionExecutor;
-import files.statistic.web.application.data.dao.TextFileDAO;
 import files.statistic.web.application.model.LineStatistic;
 import files.statistic.web.application.model.TextFile;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 
 /**
  * Created by mac on 28.07.17.
@@ -21,11 +21,13 @@ public class StatisticDataService {
     private SessionExecutor sessionExecutor;
 
     public TextFile getTextFile(long id) {
-        return sessionExecutor.readSession((s) -> new TextFileDAO(s).get(id));
+        return sessionExecutor.readSession((s) -> (TextFile) s.get(TextFile.class, id));
     }
 
     public Collection<TextFile> getAllTextFiles() {
-        return sessionExecutor.readSession((s) -> new TextFileDAO(s).getAll());
+        return sessionExecutor.readSession((s) -> new LinkedHashSet(s.createCriteria(TextFile.class)
+                .addOrder(Order.desc("id"))
+                .list()));
     }
 
     public Long saveTextStatistic(String text) {

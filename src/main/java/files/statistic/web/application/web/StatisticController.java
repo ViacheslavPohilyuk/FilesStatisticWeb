@@ -5,7 +5,7 @@ import files.statistic.web.application.model.StatisticFilter;
 import files.statistic.web.application.model.TextForm;
 
 import files.statistic.web.application.model.TextFile;
-import files.statistic.web.application.data.service.StatisticDataService;
+import files.statistic.web.application.data.StatisticDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
