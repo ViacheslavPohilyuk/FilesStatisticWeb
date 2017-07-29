@@ -1,6 +1,7 @@
-package files.statistic.web.application.service;
+package files.statistic.web.application.data.service;
 
-import files.statistic.web.application.dao.TextFileDAO;
+import files.statistic.web.application.data.SessionExecutor;
+import files.statistic.web.application.data.dao.TextFileDAO;
 import files.statistic.web.application.model.LineStatistic;
 import files.statistic.web.application.model.TextFile;
 import org.springframework.beans.factory.annotation.Autowired;

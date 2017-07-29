@@ -1,4 +1,4 @@
-package files.statistic.web.application.dao;
+package files.statistic.web.application.data.dao;
 
 import files.statistic.web.application.model.TextFile;
 import org.hibernate.HibernateException;
