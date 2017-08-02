@@ -61,9 +61,7 @@ public class LineStatistic implements Serializable {
             int lineLength = oneLine.length();
 
             /* Processing each line of a text file */
-            String[] wordsArray = oneLine.replaceAll(" +", " ")
-                    .trim()
-                    .split(" ");
+            String[] wordsArray = oneLine.trim().split(" +");
 
             /* Count of words in a current line */
             int wordsLineCount = wordsArray.length;

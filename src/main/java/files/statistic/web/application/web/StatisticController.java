@@ -1,8 +1,8 @@
 package files.statistic.web.application.web;
 
 import files.statistic.web.application.model.LineStatistic;
-import files.statistic.web.application.model.StatisticFilter;
-import files.statistic.web.application.model.TextForm;
+import files.statistic.web.application.model.form.StatisticFilter;
+import files.statistic.web.application.model.form.TextForm;
 
 import files.statistic.web.application.model.TextFile;
 import files.statistic.web.application.data.StatisticDataService;

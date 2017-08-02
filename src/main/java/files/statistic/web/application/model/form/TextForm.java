@@ -1,4 +1,4 @@
-package files.statistic.web.application.model;
+package files.statistic.web.application.model.form;
 
 import lombok.Data;
 import javax.validation.constraints.NotNull;

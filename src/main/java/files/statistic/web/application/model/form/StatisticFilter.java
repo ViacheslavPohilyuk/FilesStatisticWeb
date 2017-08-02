@@ -1,5 +1,6 @@
-package files.statistic.web.application.model;
+package files.statistic.web.application.model.form;
 
+import files.statistic.web.application.model.TextFile;
 import lombok.Data;
 
 import java.util.Collection;
