@@ -11,10 +11,9 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.sql.DataSource;
 import java.util.Properties;
 
-@org.springframework.context.annotation.Configuration
+@Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:heroku_dbconnection.properties")
 @ComponentScan({"files.statistic.web.application"})

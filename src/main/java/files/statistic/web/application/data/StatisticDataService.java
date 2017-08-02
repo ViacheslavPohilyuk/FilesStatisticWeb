@@ -17,8 +17,12 @@ import java.util.LinkedHashSet;
 @Service
 public class StatisticDataService {
 
-    @Autowired
     private SessionExecutor sessionExecutor;
+
+    @Autowired
+    public StatisticDataService(SessionExecutor sessionExecutor) {
+        this.sessionExecutor = sessionExecutor;
+    }
 
     public TextFile getTextFile(long id) {
         return sessionExecutor.readSession((s) -> (TextFile) s.get(TextFile.class, id));

@@ -18,10 +18,6 @@ import java.io.Serializable;
 @Table(name = "LineStatistic")
 public class LineStatistic implements Serializable {
 
-    //@JsonIgnore
-    //@ManyToOne
-    //private TextFile file;
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
