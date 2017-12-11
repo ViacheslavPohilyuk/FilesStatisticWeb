@@ -5,13 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /* Lombok annotations
@@ -47,9 +46,7 @@ public class TextFile implements Serializable {
         this.name = name;
         /* Getting current date when the statistic is calculated */
         this.dateOfStatisticComputation =
-                new SimpleDateFormat("dd.MM.yyyy HH:mm:ss")
-                        .format(new DateTime(DateTimeZone.UTC)
-                                .toDateTime(DateTimeZone.forID("Africa/Cairo"))
-                                .toDate());
+                LocalDateTime.now(ZoneId.of("Africa/Cairo"))
+                        .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
     }
 }
