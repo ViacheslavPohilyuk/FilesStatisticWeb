@@ -13,11 +13,6 @@ import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
-
-/**
- * Created by mac on 11.04.17.
- */
-
 @Configuration
 @EnableWebMvc
 @ComponentScan("files.statistic.web.application")
