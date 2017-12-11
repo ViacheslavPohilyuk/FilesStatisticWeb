@@ -2,83 +2,9 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/styles/style.css}"/>
     <title>File Statistic</title>
 </head>
-<style type="text/css">
-    table {
-        font-family: "Helvetica Neue", Helvetica, sans-serif;
-        width: 1245px;
-        table-layout: fixed;
-    }
-
-    td, th {
-        text-align: center;
-        overflow: hidden;
-        border: 1px solid gray;
-        padding: 5px 10px;
-    }
-
-    th {
-        background: SteelBlue;
-        color: white;
-    }
-
-    tbody tr td:nth-child(2) {
-        text-align: center;
-    }
-
-    tbody tr td:nth-child(3),
-    tbody tr td:nth-child(4) {
-        text-align: center;
-        font-family: monospace;
-    }
-
-    .num {
-        width: 55px;
-    }
-
-    .file {
-        background: #ff4144;
-        width: 100px;
-    }
-
-    .date {
-        background: #ff4144;
-        width: 150px;
-    }
-
-    .dateCell {
-        width: 150px;
-        vertical-align: top;
-    }
-
-    .fileCell {
-        background: white;
-        vertical-align: top;
-        width: 100px;
-    }
-
-    .len, .avg {
-        width: 70px;
-    }
-
-    .lword, .shword {
-        width: 375px;
-    }
-
-    .filterInput {
-        position: relative; /* Абсолютное позиционирование */
-        bottom: -5px; /* Положение от нижнего края */
-        line-height: 1px;
-    }
-
-    .fileInput {
-        position: relative; /* Абсолютное позиционирование */
-        bottom: -5px; /* Положение от нижнего края */
-        line-height: 1px;
-    }
-</style>
-
 <script>
     var app = angular.module("StatisticManagement", []);
 
