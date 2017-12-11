@@ -14,7 +14,7 @@
 - Database: MySQL 5.7
 - Front-End part: AngularJS 1.4
 
-Look how web app work:
+Look how web app works:
 https://guarded-sea-65201.herokuapp.com/
 
 Web application demonstration:
